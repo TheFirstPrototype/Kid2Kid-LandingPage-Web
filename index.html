@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <!-- SEO Meta Tags -->
+    <title>Kid2Kid | Safe Social App for Hospitalized Kids & Pediatric Patient Engagement</title>
+    <meta name="description" content="Kid2Kid is a gamified social app for sick children. We provide hospital mental health support for kids by connecting them based on age and specialty in a safe, moderated environment.">
+    <meta name="keywords" content="social app for hospitalized kids, apps for sick children, hospital mental health support for kids, pediatric patient engagement app, connecting kids in hospitals, gamified pediatric apps, virtual hospital events for kids">
+    <meta name="author" content="Kid2Kid">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://kid2kid.app/">
+    <meta property="og:title" content="Kid2Kid: Connecting Kids in Hospitals">
+    <meta property="og:description" content="A safe, gamified space for kids to connect, discover events, and feel less alone during treatment.">
+    <meta property="og:image" content="https://placehold.co/1200x630/0072BC/ffffff?text=Kid2Kid+App">
+
+    <!-- Fonts & Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <style>
+        /* --- CSS VARIABLES & RESET --- */
+        :root {
+            --primary-blue: #0072BC; /* Spanish Blue */
+            --secondary-orange: #F7941D; /* Fantasy Orange */
+            --text-dark: #333333;
+            --text-light: #ffffff;
+            --bg-light: #f4f9fc;
+            --font-main: 'Helvetica', 'Arial', sans-serif;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-main);
+            color: var(--text-dark);
+            line-height: 1.6;
+            background-color: var(--text-light);
+            overflow-x: hidden;
+        }
+
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+
+        /* --- TYPOGRAPHY --- */
+        h1, h2, h3, h4 {
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        h1 { font-size: 2.5rem; line-height: 1.2; }
+        h2 { font-size: 2rem; color: var(--primary-blue); }
+        h3 { font-size: 1.5rem; }
+        p { margin-bottom: 1rem; font-size: 1.1rem; }
+
+        /* --- UTILITIES --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background-color: var(--secondary-orange);
+            color: var(--text-light);
+            box-shadow: 0 4px 15px rgba(247, 148, 29, 0.4);
+        }
+
+        .btn-primary:hover {
+            background-color: #e08316;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background-color: var(--primary-blue);
+            color: var(--text-light);
+            box-shadow: 0 4px 15px rgba(0, 114, 188, 0.4);
+        }
+
+        .btn-secondary:hover {
+            background-color: #005a96;
+            transform: translateY(-2px);
+        }
+
+        .text-center { text-align: center; }
+        .section-padding { padding: 80px 0; }
+        .bg-light { background-color: var(--bg-light); }
+
+        /* --- HEADER --- */
+        header {
+            background-color: var(--text-light);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-blue);
+            display: flex;
+            align-items: center;
+        }
+
+        .logo span {
+            font-family: 'Comic Sans MS', 'Chalkboard SE', sans-serif; /* Child-like fallback */
+            color: var(--secondary-orange);
+            font-size: 2.5rem;
+            margin-right: 5px;
+            transform: rotate(-10deg);
+            display: inline-block;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            font-weight: 600;
+            color: var(--text-dark);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover { color: var(--primary-blue); }
+
+        .mobile-menu-btn {
+            display: none;
+            font-size: 1.5rem;
+            color: var(--primary-blue);
+            cursor: pointer;
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            margin-top: 80px;
+            background: linear-gradient(135deg, var(--bg-light) 0%, #ffffff 100%);
+            padding: 100px 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .hero-content h1 {
+            color: var(--primary-blue);
+            margin-bottom: 20px;
+        }
+
+        .hero-content .subheadline {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .hero-image img {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        /* --- MISSION/STATS --- */
+        .mission {
+            background-color: var(--primary-blue);
+            color: var(--text-light);
+        }
+
+        .mission-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            text-align: center;
+        }
+
+        .mission-item i {
+            font-size: 3rem;
+            color: var(--secondary-orange);
+            margin-bottom: 15px;
+        }
+
+        /* --- HOW IT WORKS (APP FEATURES) --- */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            transition: var(--transition);
+            text-align: center;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            background-color: rgba(0, 114, 188, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: var(--primary-blue);
+            font-size: 1.5rem;
+        }
+
+        /* --- SAFETY SECTION --- */
+        .safety {
+            background-color: #fff;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .safety-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .safety-list {
+            text-align: left;
+            margin-top: 30px;
+            background: var(--bg-light);
+            padding: 30px;
+            border-radius: 10px;
+            width: 100%;
+        }
+
+        .safety-list li {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: start;
+        }
+
+        .safety-list li i {
+            color: #27ae60;
+            margin-right: 15px;
+            margin-top: 4px;
+        }
+
+        /* --- TESTIMONIALS --- */
+        .testimonials {
+            background-color: var(--bg-light);
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .testimonial-card {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            position: relative;
+        }
+
+        .quote-icon {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 2rem;
+            color: #eee;
+            z-index: 0;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .user-avatar {
+            width: 50px;
+            height: 50px;
+            background-color: var(--secondary-orange);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 15px;
+        }
+
+        /* --- FAQ --- */
+        .faq-item {
+            background: white;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: bold;
+            color: var(--primary-blue);
+        }
+
+        .faq-answer {
+            padding: 0 20px 20px;
+            display: none;
+            color: #555;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: var(--primary-blue);
+            color: white;
+            padding: 60px 0 20px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer h3 { color: var(--secondary-orange); margin-bottom: 20px; font-size: 1.2rem; }
+        .footer ul li { margin-bottom: 10px; }
+        .footer ul li a:hover { color: var(--secondary-orange); }
+        
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 20px;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            .hero-grid { grid-template-columns: 1fr; text-align: center; }
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background: white;
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+            }
+            .nav-links.active { display: flex; }
+            .mobile-menu-btn { display: block; }
+            .hero-image { order: -1; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header / Nav -->
+    <header>
+        <div class="container navbar">
+            <a href="#" class="logo">
+                <span>K</span>id2Kid
+            </a>
+            <div class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </div>
+            <nav class="nav-links">
+                <a href="#how-it-works">How it Works</a>
+                <a href="#safety">Safety</a>
+                <a href="#partners">Hospitals</a>
+                <a href="#faq">FAQ</a>
+                <a href="https://app.kid2kid.app" class="btn btn-primary">Login to Kid2Kid</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container hero-grid">
+            <div class="hero-content">
+                <h1>Connecting Kids in Hospitals: A Safe Social World</h1>
+                <p class="subheadline">Kid2Kid is a gamified pediatric patient engagement app that helps sick children discover events, connect with peers, and feel less alone during treatment.</p>
+                <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                    <a href="https://app.kid2kid.app" class="btn btn-primary">Try Kid2Kid Now</a>
+                    <a href="#how-it-works" class="btn btn-secondary">Learn More</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <!-- Placeholder for App Screenshot -->
+                <img src="https://placehold.co/600x400/0072BC/ffffff?text=Gamified+App+Dashboard+Preview" alt="Kid2Kid App Dashboard showing points and connections">
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission / Empathy Section -->
+    <section class="section-padding mission">
+        <div class="container text-center">
+            <h2 style="color: white; margin-bottom: 40px;">No Child Should Fight Alone</h2>
+            <div class="mission-grid">
+                <div class="mission-item">
+                    <i class="fas fa-hand-holding-heart"></i>
+                    <h3>Combat Loneliness</h3>
+                    <p>We provide vital hospital mental health support for kids by connecting them with others who understand their journey.</p>
+                </div>
+                <div class="mission-item">
+                    <i class="fas fa-gamepad"></i>
+                    <h3>Gamified Fun</h3>
+                    <p>Earn points, climb the leaderboard, and unlock achievements just by socializing and exploring.</p>
+                </div>
+                <div class="mission-item">
+                    <i class="fas fa-video"></i>
+                    <h3>Virtual Events</h3>
+                    <p>Access free Zoom events to learn, play, and engage with the outside world from a hospital bed.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works (Features) -->
+    <section id="how-it-works" class="section-padding bg-light">
+        <div class="container">
+            <div class="text-center">
+                <h2>How Kid2Kid Works</h2>
+                <p>Designed for ease of use in medical settings.</p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-user-plus"></i></div>
+                    <h3>1. Create Profile</h3>
+                    <p>Sign up (parent email required). Choose a username and set your medical specialty to find peers like you.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-users"></i></div>
+                    <h3>2. Connect & Filter</h3>
+                    <p>Browse connections sorted alphabetically. Filter by age or medical specialty (Cardiology, Oncology, etc.).</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-star"></i></div>
+                    <h3>3. Earn Points</h3>
+                    <p>Gamified pediatric app mechanics: Earn points by viewing profiles, clicking links, and emailing parents.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-calendar-alt"></i></div>
+                    <h3>4. Join Events</h3>
+                    <p>View the Events Calendar for virtual hospital events for kids. Tap to join Zoom calls instantly.</p>
+                </div>
+            </div>
+            
+            <div class="text-center" style="margin-top: 50px;">
+                <a href="https://app.kid2kid.app" class="btn btn-secondary">Create Your Account</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Safety Section -->
+    <section id="safety" class="section-padding safety">
+        <div class="container">
+            <div class="safety-content">
+                <h2>Safety First: A Parent-Trusted Platform</h2>
+                <p>We understand that privacy is paramount when building apps for sick children. Kid2Kid is designed with a "Safety by Default" architecture.</p>
+                
+                <ul class="safety-list">
+                    <li><i class="fas fa-shield-alt"></i> <strong>Parental Verification:</strong> Sign-up requires a parent's email address for verification.</li>
+                    <li><i class="fas fa-user-secret"></i> <strong>Zero PII Collection:</strong> We do not collect personally identifiable information from the child.</li>
+                    <li><i class="fas fa-lock"></i> <strong>Moderated Environment:</strong> A safe space free from bullying or inappropriate content.</li>
+                    <li><i class="fas fa-id-card"></i> <strong>Anonymous Profiles:</strong> Auto-generated avatars based on usernames protect visual identity.</li>
+                </ul>
+
+                <a href="https://app.kid2kid.app" class="btn btn-primary" style="margin-top: 30px;">Launch the Safe App</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hospital Partners / Professionals -->
+    <section id="partners" class="section-padding bg-light">
+        <div class="container">
+            <div class="hero-grid">
+                <div class="hero-image">
+                    <img src="https://placehold.co/600x400/F7941D/ffffff?text=Child+Life+Specialists" alt="Child Life Specialist using Kid2Kid">
+                </div>
+                <div class="hero-content">
+                    <h2>For Child Life Specialists & Hospitals</h2>
+                    <p>Kid2Kid is a free resource for your pediatric units. It supplements your existing patient engagement strategies by providing a 24/7 community for patients who are isolated in their rooms.</p>
+                    <p><strong>Benefits for your institution:</strong></p>
+                    <ul style="margin-left: 20px; margin-bottom: 20px;">
+                        <li>• Reduces patient isolation and anxiety.</li>
+                        <li>• Zero integration cost (web-based).</li>
+                        <li>• Compliant with privacy standards.</li>
+                        <li>• Connects patients within your hospital and globally.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="section-padding">
+        <div class="container">
+            <div class="text-center">
+                <h2>Community Stories</h2>
+            </div>
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <i class="fas fa-quote-left quote-icon"></i>
+                    <p>"My son felt so alone in the cardiac unit. Finding another boy his age with the same condition on Kid2Kid changed his entire outlook. He checks the leaderboard every morning!"</p>
+                    <div class="user-info">
+                        <div class="user-avatar">M</div>
+                        <div>
+                            <strong>Sarah M.</strong><br>
+                            <span style="font-size: 0.9rem; color: #777;">Parent</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <i class="fas fa-quote-left quote-icon"></i>
+                    <p>"As a Child Life Specialist, I love having a safe digital tool to recommend. The events calendar is fantastic for keeping kids engaged during long stays."</p>
+                    <div class="user-info">
+                        <div class="user-avatar">Dr</div>
+                        <div>
+                            <strong>Dr. Emily R.</strong><br>
+                            <span style="font-size: 0.9rem; color: #777;">Pediatric Specialist</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <i class="fas fa-quote-left quote-icon"></i>
+                    <p>"I made 3 new friends this week! I like seeing my points go up when I visit their profiles. It's fun."</p>
+                    <div class="user-info">
+                        <div class="user-avatar">J</div>
+                        <div>
+                            <strong>Jax_2012</strong><br>
+                            <span style="font-size: 0.9rem; color: #777;">Kid2Kid User (Age 11)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="section-padding bg-light">
+        <div class="container" style="max-width: 800px;">
+            <div class="text-center" style="margin-bottom: 40px;">
+                <h2>Frequently Asked Questions</h2>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">Is Kid2Kid free to use? <i class="fas fa-chevron-down"></i></div>
+                <div class="faq-answer">Yes, Kid2Kid is completely free for families and hospitals. Our mission is to support sick children without adding financial burden.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">What devices does the app work on? <i class="fas fa-chevron-down"></i></div>
+                <div class="faq-answer">Kid2Kid is a web-based application (PWA). It works on any device with a browser, including iPads, tablets, smartphones, and hospital bedside computers.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">Is my child's data safe? <i class="fas fa-chevron-down"></i></div>
+                <div class="faq-answer">Absolutely. We use Google Firebase for secure authentication and do not collect PII from children. We only require a parent's email for account verification.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">How do the external links work? <i class="fas fa-chevron-down"></i></div>
+                <div class="faq-answer">Kids can optionally add links to their external profiles (like TikTok or Etsy) on their profile page. These are monitored to ensure safety.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="section-padding" style="background: var(--primary-blue); color: white; text-align: center;">
+        <div class="container">
+            <h2>Ready to join the community?</h2>
+            <p style="margin-bottom: 30px;">Start connecting, playing, and sharing today.</p>
+            <a href="https://app.kid2kid.app" class="btn btn-primary" style="font-size: 1.2rem; padding: 15px 40px;">Try Kid2Kid Now</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <a href="#" class="logo" style="color: white; margin-bottom: 20px; display:inline-block;">
+                        <span style="color: var(--secondary-orange);">K</span>id2Kid
+                    </a>
+                    <p style="font-size: 0.9rem; opacity: 0.8;">A safe social network for hospitalized kids to connect, play, and heal together.</p>
+                </div>
+                <div class="footer-col footer">
+                    <h3>Platform</h3>
+                    <ul>
+                        <li><a href="https://app.kid2kid.app">Login</a></li>
+                        <li><a href="https://app.kid2kid.app">Sign Up</a></li>
+                        <li><a href="#how-it-works">Features</a></li>
+                        <li><a href="#safety">Safety</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col footer">
+                    <h3>Community</h3>
+                    <ul>
+                        <li><a href="#partners">For Hospitals</a></li>
+                        <li><a href="#">Donate</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Kid2Kid. All rights reserved. <br>Designed for the brave kids fighting big battles.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        $(document).ready(function() {
+            // Mobile Menu Toggle
+            $('.mobile-menu-btn').click(function() {
+                $('.nav-links').toggleClass('active');
+                const icon = $(this).find('i');
+                if ($('.nav-links').hasClass('active')) {
+                    icon.removeClass('fa-bars').addClass('fa-times');
+                } else {
+                    icon.removeClass('fa-times').addClass('fa-bars');
+                }
+            });
+
+            // Smooth Scrolling
+            $('a[href*="#"]').on('click', function(e) {
+                e.preventDefault();
+                $('html, body').animate({
+                    scrollTop: $($(this).attr('href')).offset().top - 80
+                }, 500, 'linear');
+                
+                // Close mobile menu if open
+                if ($('.nav-links').hasClass('active')) {
+                    $('.nav-links').removeClass('active');
+                    $('.mobile-menu-btn i').removeClass('fa-times').addClass('fa-bars');
+                }
+            });
+
+            // FAQ Accordion
+            $('.faq-question').click(function() {
+                const answer = $(this).next('.faq-answer');
+                const icon = $(this).find('i');
+
+                // Toggle current
+                answer.slideToggle();
+                
+                // Rotate Icon
+                if (answer.is(':visible')) { // This checks before the toggle animation completes
+                   // logic handled by toggle class below effectively
+                }
+                $(this).toggleClass('active');
+                
+                // Close others (optional, but cleaner)
+                $('.faq-answer').not(answer).slideUp();
+                $('.faq-question').not(this).removeClass('active');
+                
+                // Icon handling
+                $('.faq-question i').removeClass('fa-chevron-up').addClass('fa-chevron-down');
+                if ($(this).hasClass('active')) {
+                    icon.removeClass('fa-chevron-down').addClass('fa-chevron-up');
+                }
+            });
+
+            // Simple Fade In Animation on Scroll
+            $(window).scroll(function() {
+                $('.feature-card, .mission-item').each(function() {
+                    var bottom_of_object = $(this).offset().top + $(this).outerHeight() / 4;
+                    var bottom_of_window = $(window).scrollTop() + $(window).height();
+                    
+                    if( bottom_of_window > bottom_of_object ){
+                        $(this).animate({'opacity':'1', 'margin-top':'0px'}, 500);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
